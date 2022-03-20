@@ -1,0 +1,8 @@
+---
+
+- name: Copy descriptor file
+  copy: src={{ item }}.yml dest={{ item }}.yml
+  with_items:
+    - portainer
+- name: Deploy portainer
+  shell: docker stack deploy -c /home/vagrant/portainer.yml portainer
