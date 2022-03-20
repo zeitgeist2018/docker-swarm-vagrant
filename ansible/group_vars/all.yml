@@ -1,2 +1,3 @@
 ---
 user: root
+node_ip: "{{ lookup('env', 'NODE_IP') }}"
