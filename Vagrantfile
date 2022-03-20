@@ -32,5 +32,6 @@ Vagrant.configure(2) do |config|
       n.vm.network :public_network, ip: server["ip"]
       n.vm.hostname = server["name"]
     end
+    config.vm.provision "file", source: "./ansible", destination: '/home/vagrant/ansible'
   end
 end

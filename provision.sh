@@ -21,7 +21,7 @@ installAnsible() {
 }
 
 provision() {
-  cd $HOME/ansible
+  cd /home/vagrant/ansible
   echo $'\e[1;33m'Running Ansible playbook$'\e[0m'
   ansible-playbook main.yml
 }
