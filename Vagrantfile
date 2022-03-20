@@ -25,11 +25,17 @@ Vagrant.configure(2) do |config|
 
   SERVERS.each do |server|
     config.vm.define server["name"] do |n|
+      n.vm.hostname = server["name"]
       n.vm.provision "shell", path: "provision.sh", :args => [server["name"], vars["slack_token"]]
 #       if server["number"] == 1
 #         n.vm.network "forwarded_port", guest: 4646, host: 4646, auto_correct: true
 #       end
       n.vm.network :public_network, ip: server["ip"]
+      n.vm.provider :virtualbox do |v, override|
+         override.vm.hostname = server["name"]
+         v.name = server["name"]
+#          override.vm.network :public_network, bridge: "en0: Wi-Fi", ip: "#{server["ip"]}"
+       end
       n.vm.hostname = server["name"]
     end
     config.vm.provision "file", source: "./ansible", destination: '/home/vagrant/ansible'
