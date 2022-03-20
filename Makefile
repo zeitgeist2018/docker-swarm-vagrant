@@ -3,5 +3,5 @@ redeploy:
 	@vagrant destroy -f
 	@vagrant up
 
-configure-nodes:
+bootstrap-cluster:
 	ansible-playbook host-ansible/main.yml -i host-ansible/inventory
