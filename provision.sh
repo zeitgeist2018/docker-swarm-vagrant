@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 mkdir -p /var/log/provision
 exec >/var/log/provision/provision.log 2>/var/log/provision/provision-error.log
 
@@ -15,7 +15,6 @@ prepareSystem() {
   echo $'\e[1;33m'Preparing system$'\e[0m'
   apt update -y
   apt upgrade -y
-  addAlias ""
 }
 
 installAnsible() {
@@ -36,6 +35,10 @@ prepareSystem
 installAnsible
 provision
 
-echo "Node provisioned" > /provision.txt
-
-echo $'\e[1;32m'Node provisioned successfully!$'\e[0m'
+false || exit_code=$?
+if [[ ${exit_code} -eq 0 ]]; then
+  echo "Node provisioned" > /provision.txt
+  echo $'\e[1;32m'Node provisioned successfully!$'\e[0m'
+else
+  echo $'\e[1;32m'Error provisioning node!$'\e[0m'
+fi

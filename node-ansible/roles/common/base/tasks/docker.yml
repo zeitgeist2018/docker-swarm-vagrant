@@ -7,8 +7,8 @@
       - docker-compose
     state: latest
 - name: Fix permissions
-  shell:
-    - groupadd docker
+  shell: "{{ item }}"
+  with_items:
     - usermod -aG docker vagrant
     - usermod -aG docker root
     - newgrp docker
