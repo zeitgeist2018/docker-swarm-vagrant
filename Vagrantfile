@@ -38,6 +38,6 @@ Vagrant.configure(2) do |config|
        end
       n.vm.hostname = server["name"]
     end
-    config.vm.provision "file", source: "./ansible", destination: '/home/vagrant/ansible'
+    config.vm.provision "file", source: "./node-ansible", destination: '/home/vagrant/ansible'
   end
 end
