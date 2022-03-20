@@ -1,9 +1,9 @@
 ---
 
 - name: Leave cluster if already joined
-  shell: docker swarm leave --force
+  shell: docker swarm leave --force || true
 - name: Join manager
   shell: >
     docker swarm join
-    --token={{ swarm_manager_token.stdout }}
-    {{ boostrap_node_ip.stdout }}:2377
+    --token={{ hostvars['bootstrap_node']['swarm_worker_token'].stdout }}
+    {{ hostvars['bootstrap_node']['bootstrap_node_ip'].stdout | trim}}:2377

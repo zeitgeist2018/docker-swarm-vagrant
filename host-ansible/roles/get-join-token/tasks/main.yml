@@ -1,10 +1,22 @@
 ---
 
+- name: Leave cluster if already joined
+  shell: docker swarm leave --force || true
+
 - name: Init swarm
-  shell: docker swarm init --advertise-addr {{ ansible_ssh_host }} || true
+  shell: >
+    docker swarm init 
+    --advertise-addr {{ ansible_ssh_host }} 
+    --force-new-cluster
+
 - name: Get join token
   shell: docker swarm join-token -q manager
   register: swarm_manager_token
+
+- name: Get join token
+  shell: docker swarm join-token -q worker
+  register: swarm_worker_token
+
 - name: Register bootstrap node ip
   shell: ifconfig | grep inet | awk '{print $2}' | grep 192
-  register: boostrap_node_ip
+  register: bootstrap_node_ip

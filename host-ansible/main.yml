@@ -7,6 +7,8 @@
     - role: get-join-token
 - name: Join cluster
   become: yes
-  hosts: secondary_nodes
+  hosts:
+    - node2
+    - node3
   roles:
     - role: join-cluster
