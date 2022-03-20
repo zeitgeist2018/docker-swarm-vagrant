@@ -1,0 +1,12 @@
+---
+
+- name: Retrieve join tokens
+  become: yes
+  hosts: bootstrap_node
+  roles:
+    - role: get-join-token
+- name: Join cluster
+  become: yes
+  hosts: secondary_nodes
+  roles:
+    - role: join-cluster
