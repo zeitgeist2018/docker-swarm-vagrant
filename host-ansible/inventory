@@ -1,0 +1,5 @@
+[first]
+192.168.1.201 ansible_ssh_user=root ansible_ssh_private_key_file=../.vagrant/machines/swarm-node-1/virtualbox/private_key
+[others]
+192.168.1.202 ansible_ssh_user=root ansible_ssh_private_key_file=../.vagrant/machines/swarm-node-2/virtualbox/private_key
+192.168.1.203 ansible_ssh_user=root ansible_ssh_private_key_file=../.vagrant/machines/swarm-node-3/virtualbox/private_key
