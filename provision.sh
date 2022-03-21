@@ -3,11 +3,6 @@ set -e
 mkdir -p /var/log/provision
 exec >/var/log/provision/provision.log 2>/var/log/provision/provision-error.log
 
-NODE_NAME="$1"
-SLACK_TOKEN="$2"
-
-echo "SLACK_TOKEN=\"$SLACK_TOKEN\"" >> /etc/environment
-
 export NODE_IP=$(/sbin/ifconfig  | grep 'inet ' | awk '{ print $2}' | grep 192)
 echo "NODE_IP=\"$NODE_IP\"" >> /etc/environment
 

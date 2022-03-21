@@ -1,9 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-require 'json'
-vars = JSON.parse(File.read('vars.json'))
-
 SERVER_COUNT=3
 SUBNET="192.168.1.20"
 SERVERS = []
@@ -26,7 +23,7 @@ Vagrant.configure(2) do |config|
   SERVERS.each do |server|
     config.vm.define server["name"] do |n|
       n.vm.hostname = server["name"]
-      n.vm.provision "shell", path: "provision.sh", :args => [server["name"], vars["slack_token"]]
+      n.vm.provision "shell", path: "provision.sh", :args => [server["name"]]
       n.vm.provider :virtualbox do |v, override|
          override.vm.hostname = server["name"]
          v.name = server["name"]
