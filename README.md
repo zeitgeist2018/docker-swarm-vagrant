@@ -9,4 +9,5 @@ using Vagrant.
     * 192.168.1.201
     * 192.168.1.202
     * 192.168.1.203
+4. You can access Portainer on 192.168.1.201:9000
 

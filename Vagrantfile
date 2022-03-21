@@ -21,15 +21,14 @@ Vagrant.configure(2) do |config|
   end
 
   SERVERS.each do |server|
+    config.vm.network :public_network, bridge: "en0: Wi-Fi", ip: server["ip"]
     config.vm.define server["name"] do |n|
       n.vm.hostname = server["name"]
-      n.vm.provision "shell", path: "provision.sh", :args => [server["name"]]
       n.vm.provider :virtualbox do |v, override|
          override.vm.hostname = server["name"]
          v.name = server["name"]
-         override.vm.network :public_network, bridge: "en0: Wi-Fi", ip: "#{server["ip"]}"
        end
-      n.vm.hostname = server["name"]
+      n.vm.provision "shell", path: "provision.sh", :args => [server["name"]]
     end
     config.vm.provision "file", source: "./node-ansible", destination: '/home/vagrant/ansible'
   end
